@@ -8,52 +8,98 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
-
   List vLista = [
-    {'Nome': 'mauricio', 'Telefone': '87878787', 'Avatar': 'https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366__340.png'},
-    {'Nome': 'Sofia', 'Telefone': '77777777', 'Avatar': 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png'},
-    {'Nome': 'Palona', 'Telefone': '99999999', 'Avatar': 'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png'},
-    {'Nome': 'John', 'Telefone': '88888888', 'Avatar': 'https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366__340.png'},
+    {
+      'Nome': 'mauricio',
+      'Telefone': '87878787',
+      'Avatar':
+          'https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366__340.png'
+    },
+    {
+      'Nome': 'Sofia',
+      'Telefone': '77777777',
+      'Avatar':
+          'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png'
+    },
+    {
+      'Nome': 'Palona',
+      'Telefone': '99999999',
+      'Avatar':
+          'https://cdn.pixabay.com/photo/2014/04/02/14/10/female-306407__340.png'
+    },
+    {
+      'Nome': 'John',
+      'Telefone': '88888888',
+      'Avatar':
+          'https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366__340.png'
+    },
   ];
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-        title: Title(
-            color: Colors.deepOrange,
-            child: Text("Lista de contatos")
-        ),
+        title:
+            Title(color: Colors.deepOrange, child: Text("Lista de contatos")),
       ),
-
       body: Container(
         child: ListView.builder(
-            itemCount: vLista.length,/// Quantidade de elementos que a nossa LISTVIEW vai ter
-            itemBuilder: (context,i){ ///Recebe dois parâmetro o context do meu widget e um indice..
+          itemCount: vLista.length,
 
-              return ListTile(
-                title: Text(vLista[i]["Nome"].toString()),
-                subtitle: Text(vLista[i]["Telefone"].toString()),
-                leading: CircleAvatar(backgroundImage: NetworkImage(vLista[i]["Avatar"].toString()),),
-                trailing: IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+          /// Quantidade de elementos que a nossa LISTVIEW vai ter
+          itemBuilder: (context, i) {
+            ///Recebe dois parâmetro o context do meu widget e um indice..
+
+            return ListTile(
+              title: Text(vLista[i]["Nome"].toString()),
+              subtitle: Text(vLista[i]["Telefone"].toString()),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(vLista[i]["Avatar"].toString()),
+              ),
+              trailing: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+
+              ///Exibindo AlertDialog
+              onTap: () {
+                showDialog(context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.blue,
+                      
+                      title: Text("Título teste"),
+                      titleTextStyle: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white),
+                      
+                      //titlePadding: EdgeInsets.only(top: 16, left: 16),
+
+                      content: Text("Deseja deletar o registro?"),
+                      contentTextStyle: TextStyle(color: Colors.white),
+
+                      actions: <Widget>[
+                        ElevatedButton(onPressed: (){
+                          //meu código......
+                          Navigator.pop(context);
+                        },
+                            child: Text("Sim")),
+
+
+                        ElevatedButton(onPressed: (){
+                          //meu código......
+                          Navigator.pop(context);
+                        },
+                            child: Text("Não"))
 
 
 
-
-
-              );
-
-      },
+                      ],
+                    );
+                  },
+                );
+              },
+            );
+          },
+        ),
       ),
-
-
-      ),
-
-
     );
   }
 }
